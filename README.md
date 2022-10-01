@@ -8,7 +8,7 @@ Left 4 Dead Launcher
 ====================
 -->
 
-Launcher for Valve’s [Left 4 Dead 2](https://store.steampowered.com/app/550) allows to start the game client with different set of addons and enforce the addon order by making `addonlist.txt` read-only using a nice convenient GUI.
+Launcher for Valve’s [Left 4 Dead 2](https://store.steampowered.com/app/550) allows to start the game client with different set of addons and enforce the addon order by making `addonlist.txt` read-only using a nice, convenient GUI.
 
 ![Left 4 Dead Launcher](launcher/screenshot.webp "Left 4 Dead Launcher")
 
@@ -32,7 +32,7 @@ L4D launcher works with Valve’s [Steam](https://store.steampowered.com/about/)
 Configuring the Launcher
 ------------------------
 
-`launcher.cfg` contains the list of VPKs to activate or de-activate when launching the game. To activate a particular VPK (when launching as Left 4 Dead 1), add it with `1` after its name (just like `addonlist.txt`); to activate it when launching Left 4 Dead 2, add it with `0` instead. An example of well-formatted `launcher.cfg`:
+`launcher.cfg` contains the list of VPKs to activate or de-activate when launching the game. To activate a particular VPK, when launching as Left 4 Dead 1, add it with `1` after its name (just like `addonlist.txt`); to activate it when launching Left 4 Dead 2, add it with `0` instead. An example of well-formatted `launcher.cfg`:
 
 ```ini
 make_addonlist_read_only=no
@@ -42,14 +42,14 @@ scar-l.vpk 0
 m4a4.vpk 1
 ```
 
-In short, `1` enables the addon in Left 4 Dead 1 mode and, conversely, disables it in Left 4 Dead 2 mode; `0` works vice versa (disables in L4D1 and enables in L4D2).
+In short, `1` enables the addon in Left 4 Dead 1 mode and, conversely, disables it in Left 4 Dead 2 mode; `0` works vice versa: disables in L4D1 and enables in L4D2.
 
 In order for `launcher.cfg` to appear, L4D launcher has to be run at least once.
 
 Additional VPKs
 ---------------
 
-The `addons` subfolder inside the [shared folder](https://drive.google.com/drive/folders/19-pyWdOulIBfPqkBIr8szpqkNown9Ni3?usp=sharing) contains several addon packs assembled from publicly available sources intended to fix many bugs present in the game and greatly enhance the vanilla experience. Many of included addons were modified and enhanced by me: mostly `.vtf` textures using my [VTF tools](https://github.com/ubihazard/vtf-tools). Each VPK contains a detailed list of mods used in the pack and their respective authors, along with the brief list of modifications and/or bug fixes performed on them (where applicable). The accompanying `sources` subfolder has all original Blender and Photoshop files for every piece of content altered by me: models, animations, textures, scripts, etc.
+The `addons` subfolder inside the [shared folder](https://drive.google.com/drive/folders/19-pyWdOulIBfPqkBIr8szpqkNown9Ni3?usp=sharing) contains several addon packs assembled from publicly available sources intended to fix many bugs present in the game and greatly enhance the vanilla experience. Many of included addons were modified and enhanced by me: mostly `.vtf` textures using my [VTF tools](https://github.com/ubihazard/vtf-tools). Each VPK contains a detailed list of mods used in the pack and their respective authors, along with the brief list of modifications and/or bug fixes performed on them (where applicable). The accompanying `sources` subfolder has all original Blender, Photoshop, and VScript files for every piece of content altered by me: models, animations, textures, scripts, etc.
 
 All of this is optional and none of this is required for the Left 4 Dead launcher to work: you are welcome to assemble your own mod pack(s) and make your own list of mods to activate in `launcher.cfg`.
 

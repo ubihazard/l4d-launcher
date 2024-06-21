@@ -56,4 +56,4 @@ The `modding` subfolder has most of the source files for every piece of content 
 ⭐ Support
 ---------
 
-If you like [Left 4 Dead launcher](https://github.com/ubihazard/l4d-launcher) you can [buy me a ☕](https://www.buymeacoffee.com/ubihazard "Donate")!
+If you like [Left 4 Dead launcher](https://github.com/ubihazard/l4d-launcher), you can [buy me a ☕](https://www.buymeacoffee.com/ubihazard "Donate")!

@@ -32,7 +32,7 @@ L4D launcher works with Valve’s [Steam](https://store.steampowered.com/about/)
 Configuring the Launcher
 ------------------------
 
-`launcher.cfg` contains the list of VPKs to activate or de-activate when launching the game. To activate a particular VPK when launching as Left 4 Dead 1 add it with `1` after its name (just like `addonlist.txt`); to activate it when launching Left 4 Dead 2 add it with `0` instead. A VPK that is enabled in L4D1 will be disabled in L4D2 and vice versa.
+`launcher.cfg` contains the list of VPKs to activate or de-activate when launching the game. To activate a particular VPK when launching as Left 4 Dead 1, add it with `1` after its name (just like `addonlist.txt`); to activate it when launching Left 4 Dead 2, add it with `0` instead. A VPK that is enabled in L4D1 will be disabled in L4D2, and vice versa.
 
 An example of a well-formatted `launcher.cfg`:
 

@@ -19,7 +19,7 @@ Left 4 Dead launcher is built as a [Microsoft HTML Application](https://learn.mi
 How to Use
 ----------
 
-  * Download the [core VPKs](https://drive.google.com/drive/folders/19-pyWdOulIBfPqkBIr8szpqkNown9Ni3?usp=drive_link) and extract them to `Steam\steamapps\common\Left 4 Dead 2`. You will end up with two more folders in game directory: `left4dead1` and `fontscheme`. The `left4dead1` folder contains VPKs that get activated when launching the game in Left 4 Dead 1 mode: they include the original font and loading screen graphics. The `fontscheme` has the Left 4 Dead 2 font instead.
+  * Download the [core VPKs](https://drive.google.com/drive/folders/19-pyWdOulIBfPqkBIr8szpqkNown9Ni3?usp=drive_link) and extract them to `Steam\steamapps\common\Left 4 Dead 2`. You will end up with two more folders in game directory: `left4dead1` and `fontscheme`. The `left4dead1` folder contains VPKs that get activated when launching the game in Left 4 Dead 1 mode: they include the original font and loading screen graphics. The `fontscheme` has the Left 4 Dead 2 font instead. (You can also find the core VPKs on the [release page](https://github.com/ubihazard/l4d-launcher/releases/tag/1.0).)
 
   * Download Left 4 Dead 1 menu screen [cinematics](https://github.com/ubihazard/l4d-launcher/releases/download/1.0/Videos.zip) and move them to `Steam\steamapps\common\Left 4 Dead 2\left4dead2\media`. There are also alternative HD backgrounds [available on Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=2490673505). Just make sure to rename the files by putting `.l4d1` after their file name and before the `.bik` file extension, like so: `l4d2_background01.l4d1.bik`. Make sure not to replace any of the original Left 4 Dead 2 cinematic files.
 

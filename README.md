@@ -34,9 +34,12 @@ Configuring the Launcher
 
 `launcher.cfg` contains the list of VPKs to activate or de-activate when launching the game. To activate a particular VPK when launching as Left 4 Dead 1, add it with `1` after its name (just like `addonlist.txt`); to activate it when launching Left 4 Dead 2, add it with `0` instead. A VPK that is enabled in L4D1 will be disabled in L4D2, and vice versa.
 
+(`launcher.cfg` is located at `Steam\steamapps\common\Left 4 Dead 2\left4dead2\cfg`.)
+
 An example of a well-formatted `launcher.cfg`:
 
 ```ini
+style_crosshair=no
 make_addonlist_read_only=no
 l4d1_addon_vpks=
 l4d1.vpk 1
@@ -44,7 +47,17 @@ scar-l.vpk 0
 m4a4.vpk 1
 ```
 
-In order for `launcher.cfg` to appear, L4D launcher has to be run at least once. Set `make_addonlist_read_only` to `yes` if you need to enforce addon loading order.
+In order for `launcher.cfg` to appear, L4D launcher has to be run at least once.
+
+Use `style_crosshair` to enable or disable styling of crosshair. If enabled, add this to your `autoexec.cfg`:
+
+```ini
+exec crosshair_launcher
+```
+
+Make sure `autoexec.cfg`, `crosshair_l4d2.cfg`, and `crosshair_l4d1.cfg` exist in `Steam\steamapps\common\Left 4 Dead 2\left4dead2\cfg` configuration folder.
+
+Set `make_addonlist_read_only` to `yes` if you need to enforce addon loading order.
 
 Additional VPKs
 ---------------

@@ -260,9 +260,11 @@ a:active {
   <script type="text/javascript">
 var isDebugging = false;
 var isDead = false;
+
 var fso;
 var shell;
 
+var styleCrosshDefault = "no";
 var makeRoDefault = "no";
 var vpksDefault = ["l4d1.vpk"];
 var vpksStateDefault = [1];
@@ -270,6 +272,9 @@ var vpksStateDefault = [1];
 var gminfo;
 var gminfo_l4d2;
 var gminfo_l4d1;
+var scope;
+var scope_l4d2;
+var scope_l4d1;
 var addonList;
 var addonsDir;
 var mediaDir;
@@ -277,6 +282,7 @@ var l4d1Dir;
 var l4d2;
 var configPath;
 var steamPath;
+var styleCrossh;
 var makeRo;
 var vpks;
 var vpksState;
@@ -390,6 +396,15 @@ function moveFile (from, to) {
   return true;
 }
 
+function copyFile (from, to) {
+  try {
+    fso.CopyFile (from, to, true);
+  } catch (err) {
+    return false;
+  }
+  return true;
+}
+
 /* String */
 
 function trimLeft (str) {
@@ -497,6 +512,7 @@ function readCfgLine (key, line) {
 
 function readConfig (path) {
   if (!fileExists (path)) {
+    styleCrossh = styleCrosshDefault;
     makeRo = makeRoDefault;
     vpks = vpksDefault;
     vpksState = vpksStateDefault;
@@ -508,6 +524,11 @@ function readConfig (path) {
 
   var forReading = 1;
   var file = fso.OpenTextFile (path, forReading);
+
+  styleCrossh = readCfgLine ("style_crosshair", readLine (file));
+  if (styleCrossh !== "yes" && styleCrossh !== "no") {
+    styleCrossh = styleCrosshDefault;
+  }
 
   makeRo = readCfgLine ("make_addonlist_read_only", readLine (file));
   if (makeRo !== "yes" && makeRo !== "no") {
@@ -539,6 +560,7 @@ function readConfig (path) {
 function writeConfig (path) {
   var forWriting = 2;
   var file = fso.OpenTextFile (path, forWriting, true);
+  file.WriteLine ("style_crosshair=" + styleCrossh);
   file.WriteLine ("make_addonlist_read_only=" + makeRo);
   file.WriteLine ("l4d1_addon_vpks=");
   for (var i = 0; i < vpks.length; ++i) {
@@ -613,9 +635,14 @@ function launch (l4d2) {
 
   deleteFile (addonList);
   moveFile (addonList + ".new", addonList);
-
   if (makeRo === "yes") {
     shell.run ('attrib +R "' + addonList + '"', 0, true);
+  }
+
+  deleteFile (scope);
+  if (styleCrossh === "yes") {
+    if (l4d2) copyFile (scope_l4d2, scope);
+    else copyFile (scope_l4d1, scope);
   }
 
   writeConfig (configPath);
@@ -683,10 +710,13 @@ function main() {
   shell = new ActiveXObject ("WScript.Shell");
   fso = new ActiveXObject ("Scripting.FileSystemObject");
   var currDir = fso.GetAbsolutePathName (".");
-  configPath = fso.BuildPath (currDir, "launcher.cfg");
+  configPath = fso.BuildPath (currDir, "left4dead2\\cfg\\launcher.cfg");
   gminfo = fso.BuildPath (currDir, "left4dead2\\gameinfo.txt");
   gminfo_l4d2 = fso.BuildPath (currDir, "left4dead2\\gameinfo.l4d2.txt");
   gminfo_l4d1 = fso.BuildPath (currDir, "left4dead2\\gameinfo.l4d1.txt");
+  scope = fso.BuildPath (currDir, "left4dead2\\cfg\\crosshair_launcher.cfg");
+  scope_l4d2 = fso.BuildPath (currDir, "left4dead2\\cfg\\crosshair_l4d2.cfg");
+  scope_l4d1 = fso.BuildPath (currDir, "left4dead2\\cfg\\crosshair_l4d1.cfg");
   addonList = fso.BuildPath (currDir, "left4dead2\\addonlist.txt");
   addonsDir = fso.BuildPath (currDir, "left4dead2\\addons");
   mediaDir = fso.BuildPath (currDir, "left4dead2\\media");
@@ -694,6 +724,7 @@ function main() {
   l4d2 = fso.BuildPath (currDir, "left4dead2.exe");
 
   cinematics = [
+    fso.BuildPath (mediaDir, "l4d2_intro.bik"),
     fso.BuildPath (mediaDir, "l4d2_background01.bik"),
     fso.BuildPath (mediaDir, "l4d2_background02.bik"),
     fso.BuildPath (mediaDir, "l4d2_background03.bik"),
@@ -702,6 +733,7 @@ function main() {
   ];
 
   cinematics_l4d2 = [
+    fso.BuildPath (mediaDir, "l4d2_intro.l4d2.bik"),
     fso.BuildPath (mediaDir, "l4d2_background01.l4d2.bik"),
     fso.BuildPath (mediaDir, "l4d2_background02.l4d2.bik"),
     fso.BuildPath (mediaDir, "l4d2_background03.l4d2.bik"),
@@ -710,6 +742,7 @@ function main() {
   ];
 
   cinematics_l4d1 = [
+    fso.BuildPath (mediaDir, "l4d2_intro.l4d1.bik"),
     fso.BuildPath (mediaDir, "l4d2_background01.l4d1.bik"),
     fso.BuildPath (mediaDir, "l4d2_background02.l4d1.bik"),
     fso.BuildPath (mediaDir, "l4d2_background03.l4d1.bik"),

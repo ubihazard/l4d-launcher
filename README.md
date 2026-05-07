@@ -12,7 +12,7 @@ Launcher for Valve’s [Left 4 Dead 2](https://store.steampowered.com/app/550) a
 
 ![Left 4 Dead Launcher](launcher/screenshot.webp "Left 4 Dead Launcher")
 
-In 2010 Valve released the original “No Mercy” campaign for Left 4 Dead 2 as part of “The Sacrifice” update. Two years later the rest of campaigns from the first game followed with the release of “Cold Stream” DLC. While the ability to play original campaigns with new special infected, weapons, mechanics, and technical improvements was a welcome addition, the ports were quite straightforward in their nature and lacked necessary adjustments to properly integrate them into the sequel. Oversights included zombies from southern regions of United States wearing summer clothes in what appeared to be late autumn midwest setting of the predecessor, new special infected zombies not really fitting classic atmosphere and art style, as well as numerous bugs and exploits. Although most recent update, “The Last Stand”, finally addressed most of the glaring issues, it still didn't improve visuals enough to bring them on par with the core Left 4 Dead 2 campaigns quality-wise.
+In 2010 Valve released the original “No Mercy” campaign for Left 4 Dead 2 as part of “The Sacrifice” update. Two years later the rest of campaigns from the first game followed with the release of “Cold Stream” DLC. While the ability to play original campaigns with new special infected, weapons, mechanics, and technical improvements was a welcome addition, the ports were quite straightforward in their nature and lacked necessary adjustments to properly integrate them into the sequel. Oversights included zombies from southern regions of United States wearing summer clothes in what appeared to be late autumn midwest setting of the predecessor, new special infected zombies not really fitting classic atmosphere and art style, as well as numerous bugs and exploits. Although most recent update, “The Last Stand”, finally addressed most of the glaring issues, it still didn’t improve visuals enough to bring them on par with the core Left 4 Dead 2 campaigns quality-wise.
 
 Now, with the help of Left 4 Dead launcher and the power of amazing [Left 4 Dead modding community](https://steamcommunity.com/app/550/workshop/), the remaining bits can be fixed. Technically, what the launcher does is it toggles a pre-configured set of addons depending on which game you start, – all with a single button press. Stuff that can be changed: models, textures, HUD, menus, etc., – anything that can be modified using game’s addon system.
 
@@ -58,15 +58,15 @@ m4a4.vpk 1
 
 Make sure VPKs that you configure in launcher are actually present in game’s `addonlist.txt` file located at `Steam\steamapps\common\Left 4 Dead 2\left4dead2`.
 
-Use `style_crosshair` to toggle styling of crosshair (it is blue in L4D1 and green in L4D2). If enabled, add this to your `autoexec.cfg`:
+Use `style_crosshair` to toggle different appearance of crosshair (it is blue in L4D1 and green in L4D2). If enabled, add this to your `autoexec.cfg`:
 
 ```ini
 exec crosshair_launcher
 ```
 
-Ensure `crosshair_l4d2.cfg`, and `crosshair_l4d1.cfg` exist in `Steam\steamapps\common\Left 4 Dead 2\left4dead2\cfg` configuration folder.
+Ensure both `crosshair_l4d2.cfg` and `crosshair_l4d1.cfg` exist in `Steam\steamapps\common\Left 4 Dead 2\left4dead2\cfg` configuration folder.
 
-Set `make_addonlist_read_only` to `yes` if you need to enforce addon loading order. But don't forget to disable this option and manually clear read-only flag on `addonlist.txt` when adding new or removing old game addons. This setting is also easily accessible from launcher’s UI.
+Set `make_addonlist_read_only` to `yes` if you need to enforce addon loading order. But don’t forget to disable this option and manually clear read-only flag on `addonlist.txt` when adding new or removing old game addons. This setting is also easily accessible from launcher’s UI.
 
 Additional VPKs
 ---------------

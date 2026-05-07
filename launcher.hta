@@ -196,12 +196,67 @@ a:active {
 #buttons .button {
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  width: 100%;
-  height: 15em;
+  width: 100%;  /* 460px */
+  height: 15em; /* 215px */
   border-radius: 12px;
   position: relative;
   display: table-cell;
   cursor: pointer;
+}
+
+#buttons .button_overlay2,
+#buttons .button_shadow {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 15em;
+  border-radius: 12px;
+}
+
+#buttons .button_overlay {
+  position: absolute;
+  top: -80px;
+  left: -80px;
+  width: 100%;
+  height: 15em;
+  border-radius: 12px;
+  visibility: hidden;
+}
+
+#buttons .button:hover .button_overlay2 {
+  background: white;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
+  z-index: 1;
+}
+
+#buttons .button:hover .button_shadow {
+  border: 1px white solid;
+  box-sizing: border-box;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
+  z-index: 2;
+}
+
+#buttons .button:hover .button_overlay {
+  visibility: visible;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Blur(pixelRadius=80)";
+  z-index: -1;
+}
+
+.hd4k #buttons .button,
+.hd4k #buttons .button_overlay,
+.hd4k #buttons .button_overlay2,
+.hd4k #buttons .button_shadow {
+  border-radius: 18px;
+}
+
+.hd4k #buttons .button_overlay {
+  top: -100px;
+  left: -100px;
+}
+
+.hd4k #buttons .button:hover .button_overlay {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Blur(pixelRadius=100)";
 }
 
 #buttons.disabled .button {
@@ -211,42 +266,6 @@ a:active {
 #buttons.disabled .button:hover .button_overlay {
   -ms-filter: "" !important;
   display: none !important;
-}
-
-#buttons .button:hover .button_overlay2 {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 15em;
-  background: white;
-  border-radius: 12px;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
-  z-index: 1;
-}
-
-#buttons .button:hover .button_shadow {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 15em;
-  border: 1px white solid;
-  box-sizing: border-box;
-  border-radius: 12px;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
-  z-index: 2;
-}
-
-#buttons .button:hover .button_overlay {
-  position: absolute;
-  top: -80px;
-  left: -80px;
-  width: 100%;
-  height: 15em;
-  border-radius: 12px;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Blur(pixelRadius=80)";
-  z-index: -1;
 }
 
 .l4d2 {
@@ -484,11 +503,55 @@ function errorNotFound (path, dir) {
 }
 
 function placeWindow() {
-  var width  = Math.max (600 * /*screen.availWidth*/screen.width / 1920, 600);
-  var height = Math.max (width * 1.1, 660);
+
+  function adjustButton (btn, height) {
+    btn.setAttribute ("style", "height:" + height + "px");
+    for (var i = 0; i < btn.childNodes.length; ++i) {
+      if (hasClass (btn.childNodes[i], "button_overlay"))  btn.childNodes[i].setAttribute ("style", "height:" + height + "px");
+      if (hasClass (btn.childNodes[i], "button_overlay2")) btn.childNodes[i].setAttribute ("style", "height:" + height + "px");
+      if (hasClass (btn.childNodes[i], "button_shadow"))   btn.childNodes[i].setAttribute ("style", "height:" + height + "px");
+    }
+  }
+
+  // Figure out screen orientation
+  var d = 1920, dx, dy;
+  if (screen.width > screen.height) {
+    dx = screen.width;
+    dy = screen.height;
+  } else {
+    dx = screen.height;
+    dy = screen.width;
+  }
+
+  // Adjust graphics and effects based on screen resolution
+  // for proper scaling
+  var is2k = false, is4k = false;
+  if (dx / dy > 16 / 9) {
+    d = 1080;
+    dx = dy;
+    if      (dx / d >= 2160 / d) is4k = true
+    else if (dx / d >= 1440 / d) is2k = true;
+  } else {
+    if      (dx / d >= 3840 / d) is4k = true
+    else if (dx / d >= 2560 / d) is2k = true;
+  }
+  if      (is4k) document.body.setAttribute ("class", "hd4k")
+  else if (is2k) document.body.setAttribute ("class", "hd2k");
+
+  // Figure out scaled window size
+  // and center it on the screen
+  var width  = Math.round (Math.max (600 * dx / d, 600));
+  var height = Math.round (Math.max (width * 1.1, 660));
   window.resizeTo (width, height);
   window.moveTo ((screen.availWidth - width) / 2
   , (screen.availHeight - height) / 2);
+
+  // Scale buttons
+  var btnWidth = $("l4d2").offsetWidth;
+  var btnHeight = Math.round (Math.max (btnWidth / 460, 1) * 215);
+  adjustButton($("l4d2"), btnHeight);
+  adjustButton($("l4d1"), btnHeight);
+
   window.focus();
 }
 
@@ -789,8 +852,8 @@ function main() {
 <body onload="main()" ondragstart="return false;" ondrop="return false;">
 <div id="content"><div id="center">
   <div id="buttons">
-    <div class="outer"><div class="button l4d2" onclick="launchL4D2()"><div class="button_overlay l4d2"></div><div class="button_overlay2"></div><div class="button_shadow"></div></div></div>
-    <div class="outer"><div class="button l4d1" onclick="launchL4D1()"><div class="button_overlay l4d1"></div><div class="button_overlay2"></div><div class="button_shadow"></div></div></div>
+    <div class="outer"><div id="l4d2" class="button l4d2" onclick="launchL4D2()"><div class="button_overlay l4d2"></div><div class="button_overlay2"></div><div class="button_shadow"></div></div></div>
+    <div class="outer"><div id="l4d1" class="button l4d1" onclick="launchL4D1()"><div class="button_overlay l4d1"></div><div class="button_overlay2"></div><div class="button_shadow"></div></div></div>
   </div>
   <div id="status_outer">
     <div id="ronly" onclick="toggleReadOnly()"><b></b>Make addonlist.txt read-only</div>

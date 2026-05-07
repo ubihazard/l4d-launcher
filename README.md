@@ -56,15 +56,17 @@ scar-l.vpk 0
 m4a4.vpk 1
 ```
 
+Make sure VPKs that you configure in launcher are actually present in game’s `addonlist.txt` file located at `Steam\steamapps\common\Left 4 Dead 2\left4dead2`.
+
 Use `style_crosshair` to toggle styling of crosshair (it is blue in L4D1 and green in L4D2). If enabled, add this to your `autoexec.cfg`:
 
 ```ini
 exec crosshair_launcher
 ```
 
-Make sure `autoexec.cfg`, `crosshair_l4d2.cfg`, and `crosshair_l4d1.cfg` exist in `Steam\steamapps\common\Left 4 Dead 2\left4dead2\cfg` configuration folder.
+Ensure `crosshair_l4d2.cfg`, and `crosshair_l4d1.cfg` exist in `Steam\steamapps\common\Left 4 Dead 2\left4dead2\cfg` configuration folder.
 
-Set `make_addonlist_read_only` to `yes` if you need to enforce addon loading order.
+Set `make_addonlist_read_only` to `yes` if you need to enforce addon loading order. But don't forget to disable this option and manually clear read-only flag on `addonlist.txt` when adding new or removing old game addons. This setting is also easily accessible from launcher’s UI.
 
 Additional VPKs
 ---------------
